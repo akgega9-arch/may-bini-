@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Kanza, Dari Hazib ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .password-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .password-card {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .password-card input {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 2px solid #ffd1d7;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .password-card input:focus {
+      border-color: #e63946;
+    }
+
+    .error-msg {
+      color: #e63946;
+      font-size: 12px;
+      margin-bottom: 10px;
+      display: none;
+      font-weight: 600;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 35px 25px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(220, 90, 120, 0.2);
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+      position: relative;
+    }
+
+    .step {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji-header {
+      font-size: 50px;
+      margin-bottom: 12px;
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    @keyframes bounce {
+      to { transform: translateY(-6px); }
+    }
+
+    h1 {
+      color: #e63946;
+      font-size: 21px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: #4a4a4a;
+      line-height: 1.6;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .highlight {
+      background: #ffe3e6;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border-left: 4px solid #e63946;
+      font-weight: 600;
+      color: #b71c1c;
+      text-align: left;
+      margin-bottom: 18px;
+      font-size: 13px;
+    }
+
+    .secret-box {
+      background: #fff0f3;
+      border: 1px dashed #e63946;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #d90429;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ffd1d7;
+      border-radius: 12px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea {
+      height: 90px;
+      resize: none;
+    }
+
+    textarea:focus, select:focus {
+      border-color: #e63946;
+    }
+
+    .btn-container {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+
+    .btn-next {
+      background-color: #ff4b2b;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+    }
+
+    .btn-next:hover {
+      background-color: #ff416c;
+      transform: translateY(-2px);
+    }
+
+    .btn-balikan {
+      background-color: #ff4b2b;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+    }
+
+    .btn-teman {
+      background-color: #4a90e2;
+      color: white;
+      box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+    }
+
+    .btn-balikan:hover, .btn-teman:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 25px 20px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .btn-ig {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: white;
+      font-weight: 600;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- POPUP PASSWORD -->
+  <div class="password-overlay" id="passwordModal">
+    <div class="password-card">
+      <div style="font-size: 45px;">🔒</div>
+      <h2 style="color: #e63946; font-size: 18px; margin-top: 8px;">Pesan Ini Terkunci</h2>
+      <p style="font-size: 12px; color: #666; margin-top: 4px;">
+        Masukkan password khusus untuk membuka pesan dari Hazib:
+      </p>
+      
+      <input type="password" id="pwInput" placeholder="Ketik password di sini...">
+      <div class="error-msg" id="errorMsg">Password salah! Coba ingat-ingat lagi ya... 🥺</div>
+      
+      <button class="btn-next" onclick="cekPassword()">Buka Pesan 🔓</button>
+    </div>
+  </div>
+
+  <div class="card">
+    
+    <!-- STEP 1: Permintaan Maaf & Pesan Rahasia Awal -->
+    <div class="step active" id="step1">
+      <div class="emoji-header">🥺📜</div>
+      
+      <div class="secret-box">
+        🤫 Tolong jaga pesan ini untuk kita berdua aja ya, jangan kasih tau siapa pun.
+      </div>
+
+      <h1>Hai Kanza, Ada Yang Mau Aku Omongin...</h1>
+      <p>
+        Sebelumnya aku mau minta maaf dari hati yang paling dalam atas kesalahanku kemarin. Aku sadar sikapku udah bikin kamu kecewa dan sedih.
+      </p>
+      <div class="highlight">
+        "Aku tahu kata maaf aja gak cukup, tapi aku bener-bener nyesel..."
+      </div>
+      <button class="btn-next" onclick="nextStep(2)">Lanjut Baca Bentar Ya... ➔</button>
+    </div>
+
+    <!-- STEP 2: Perasaan Hazib -->
+    <div class="step" id="step2">
+      <div class="emoji-header">💬✨</div>
+      <h1>Sejujurnya Perasaanku Ke Kamu...</h1>
+      <p>
+        Semenjak ada jarak ini, hari-hariku rasanya sepi. Kamu itu orang yang selalu bikin hari-hariku lebih berwarna.
+      </p>
+      <p>
+        Aku sayang banget sama kamu, dan aku gak mau kehilangan seseorang yang seberharga kamu cuma karena kebodohanku.
+      </p>
+      <div class="highlight">
+        "Aku mau belajar dari kesalahan ini dan siap perbaiki semuanya."
+      </div>
+      <button class="btn-next" onclick="nextStep(3)">Lanjut Ke Perasaan Kamu ➔</button>
+    </div>
+
+    <!-- STEP 3: Kanza Menjelaskan Perasaannya & Cara Ketemu -->
+    <div class="step" id="step3">
+      <div class="emoji-header">✍️💌</div>
+      <h1>Sekarang, Bagaimanakah Perasaan Kamu?</h1>
+      <p>
+        Aku mau denger dari sisi kamu. Ceritain apa yang kamu rasain sekarang atau apa yang bikin kamu ganjel...
+      </p>
+      
+      <div class="form-group">
+        <label for="perasaanKanza">Curahan Hati / Perasaan Kanza:</label>
+        <textarea id="perasaanKanza" placeholder="Tulis apa aja yang kamu rasain di sini ya Kanza... (Jujur aja, gapapa)"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="metodeObrolan">Mau lanjutin obrolan lewat mana?</label>
+        <select id="metodeObrolan">
+          <option value="Mau ngobrol langsung secara tatap muka / ketemu">🤝 Ketemu Secara Langsung</option>
+          <option value="Mau cukup dari pesan / DM ini aja dulu">💬 Cukup Dari Pesan Ini Aja</option>
+        </select>
+      </div>
+
+      <button class="btn-next" onclick="kePilihan()">Lanjut Ke Pilihan Hubungan ➔</button>
+    </div>
+
+    <!-- STEP 4: Pilihan Keputusan & Pesan Rahasia Akhir -->
+    <div class="step" id="step4">
+      <div class="emoji-header">🤝❤️</div>
+      <h1>Keputusan Dari Kamu</h1>
+      <p>
+        Apapun keputusan kamu, aku bakal hargai dan terima dengan lapang dada.
+      </p>
+      <p style="font-weight: 600; color: #e63946; margin-bottom: 12px;">
+        Menurut kamu, langkah terbaik buat kita selanjutnya apa?
+      </p>
+
+      <div class="btn-container">
+        <button class="btn-balikan" onclick="bukaModalIG('Mau Balikan & Coba Lagi 💕')">💕 Balikan & Coba Lagi dari Awal</button>
+        <button class="btn-teman" onclick="bukaModalIG('Jadi Teman / Sahabat Dulu 🤝')">🤝 Bawa Santai / Jadi Teman Dulu</button>
+      </div>
+
+      <div class="secret-box" style="margin-top: 20px; margin-bottom: 0;">
+        🤫 Inget ya, pesan ini cukup buat kita berdua aja & jangan kasih tau siapa-siapa.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal Buka IG & Salin Pesan -->
+  <div class="modal" id="modalPlatform">
+    <div class="modal-content">
+      <div style="font-size: 45px;">📸 Instagram DM</div>
+      <h2 style="color: #e63946; font-size: 18px; margin-top: 8px;">Kirim Jawaban Ke IG Hazib</h2>
+      <p style="font-size: 13px; color: #555; margin-top: 8px;">
+        Klik tombol di bawah untuk **menyalin pesan** otomatis dan langsung berpindah ke akun Instagram Hazib. Kamu tinggal *paste* (tempel) pesan di DM ya!
+      </p>
+
+      <button class="btn-ig" onclick="kirimViaIG()">📸 Salin Pesan & Buka IG Hazib</button>
+    </div>
+  </div>
+
+  <script>
+    // === SETTING PASSWORD DAN IG ===
+    const PASSWORD_RAHASIA = "1331";
+    const USERNAME_IG_HAZIB = "akge_ga";
+
+    function cekPassword() {
+      const input = document.getElementById("pwInput").value;
+      const error = document.getElementById("errorMsg");
+
+      if (input === PASSWORD_RAHASIA) {
+        document.getElementById("passwordModal").style.display = "none";
+      } else {
+        error.style.display = "block";
+      }
+    }
+
+    let pilihanStatus = "";
+    let pesanLengkap = "";
+
+    function nextStep(stepNumber) {
+      document.querySelectorAll('.step').forEach(step => {
+        step.classList.remove('active');
+      });
+      document.getElementById('step' + stepNumber).classList.add('active');
+    }
+
+    function kePilihan() {
+      const isinya = document.getElementById("perasaanKanza").value.trim();
+      if (isinya === "") {
+        alert("Isi dulu perasaan kamu dikit gapapa ya Kanza... 🥺");
+        return;
+      }
+      nextStep(4);
+    }
+
+    function bukaModalIG(status) {
+      pilihanStatus = status;
+      const isiPerasaan = document.getElementById("perasaanKanza").value;
+      const pilihanKetemu = document.getElementById("metodeObrolan").value;
+
+      pesanLengkap = "Hai Hazib, ini jawaban dari aku (Kanza):\n\n";
+      pesanLengkap += "Perasaanku saat ini:\n" + isiPerasaan + "\n\n";
+      pesanLengkap += "Keinginan Komunikasi:\n" + pilihanKetemu + "\n\n";
+      pesanLengkap += "Pilihan Keputusanku:\n" + pilihanStatus;
+
+      document.getElementById("modalPlatform").style.display = "flex";
+    }
+
+    function kirimViaIG() {
+      navigator.clipboard.writeText(pesanLengkap).then(() => {
+        alert("Pesan perasaamu sudah disalin! Tinggal paste/tempel di DM Instagram Hazib ya! ✨");
+        window.location.href = "https://instagram.com/" + USERNAME_IG_HAZIB;
+      }).catch(err => {
+        alert("Buka Instagram dan tempel teks perasaannya di DM Hazib ya!");
+        window.location.href = "https://instagram.com/" + USERNAME_IG_HAZIB;
+      });
+    }
+  </script>
+</body>
+</html>
